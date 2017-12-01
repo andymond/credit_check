@@ -1,36 +1,40 @@
-card_number = "4929735477250543"
-valid = false #sets default
-
-#Luhn algorithm
+card_number = "342804633855673"
 digits = card_number.reverse.split("")
 
-doubled_digits = []
-digits.each_with_index do |digit, index|
-  if index.odd?
-    doubled_digits << digit.to_i * 2
-  else
-    doubled_digits << digit.to_i
-  end
-end
 
+def alternate_doubler(digits)
+  doubled_digits = []
+  digits.each_with_index do |digit, index|
+    if index.odd?
+      doubled_digits << digit.to_i * 2
+    else
+      doubled_digits << digit.to_i
+    end
+  end
+  doubled_digits
+end
 #p doubled_digits
 
-single_digits = doubled_digits.map do |digit|
-  if digit > 9
-    digit - 9
-  else
-    digit
+def double_digit_converter(digits)
+  single_digits = alternate_doubler(digits).map do |digit| #probably better to pass output of alternate_doubler to converter
+    if digit > 9
+      digit - 9
+    else
+      digit
+    end
   end
+  p single_digits
 end
 
-p single_digits
-
+final = double_digit_converter(digits)
 #sum = 0
 #single_digits.each do |digit|
 #  sum += digit
 #end
-sum = single_digits.inject(:+)
+
+sum = final.inject(:+)
 p sum
+
 
 if sum % 10 == 0
  p "The number is valid!"
