@@ -5,19 +5,35 @@ class CreditCheck
     @card_number = card_number
   end
 
+  def verify_card_number
+    if card_number =~ /^-?[0-9]+$/
+      card_number
+    else
+      raise ArgumentError.new("Invalid Characters in Input")
+    end
+  end
+
   def reverse_digits
     card_number.split("").reverse.map { |d| d.to_i }
   end
 
   def double_alternates
     reverse_digits.map.with_index do |d, i|
-      d % 2 == 0 ? d * 2 : d
+      i.odd? ? d * 2 : d
     end
   end
 
   def convert_to_single_digits
     double_alternates.map do |d|
       d > 9 ? d - 9 : d
+    end
+  end
+
+  def validation
+    if convert_to_single_digits.sum % 10 == 0
+      print "Valid Card Number"
+    else
+      print "Invalid Card Number"
     end
   end
 end
