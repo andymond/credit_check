@@ -31,9 +31,9 @@ class CreditCheck
 
   def validation
     if convert_to_single_digits.sum % 10 == 0
-      print "Valid Card Number"
+      "Valid Card Number"
     else
-      print "Invalid Card Number"
+      "Invalid Card Number"
     end
   end
 end
