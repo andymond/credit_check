@@ -9,7 +9,7 @@ class CreditCheck
     if card_number =~ /^-?[0-9]+$/ && card_number.length.between?(8, 19)
       card_number
     else
-      raise ArgumentError.new("Invalid CC# Format")
+      raise ArgumentError.new
     end
   end
 
