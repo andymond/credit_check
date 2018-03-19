@@ -46,7 +46,19 @@ class CreditCheckTest < MiniTest::Test
   end
 
   def test_raises_error_for_bad_input
-    credit_check = CreditCheck.new("Word")
+    credit_check = CreditCheck.new("Wo0oooooooord")
+
+    assert_raises ArgumentError do
+      credit_check.verify_card_number
+    end
+
+    credit_check = CreditCheck.new("1123123123123!")
+
+    assert_raises ArgumentError do
+      credit_check.verify_card_number
+    end
+
+    credit_check = CreditCheck.new("11231")
 
     assert_raises ArgumentError do
       credit_check.verify_card_number
