@@ -14,7 +14,7 @@ class CreditCheck
   end
 
   def reverse_digits
-    card_number.split("").reverse.map { |d| d.to_i }
+    verify_card_number.split("").reverse.map { |d| d.to_i }
   end
 
   def double_alternates
